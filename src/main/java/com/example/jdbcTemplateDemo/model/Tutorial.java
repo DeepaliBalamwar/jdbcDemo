@@ -1,22 +1,66 @@
 package com.example.jdbcTemplateDemo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Tutorial {
-
-	 private long id;
+public class Tutorial 
+{
+	@Id
+	private long id;
+	
 	  private String title;
 	  private String description;
 	  private boolean published;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public boolean isPublished() {
+		return published;
+	}
+
+	public void setPublished(boolean published) {
+		this.published = published;
+	}
+
+	@Override
+	public String toString() {
+		return "Tutorial [id=" + id + ", title=" + title + ", description=" + description + ", published=" + published
+				+ "]";
+	}
+
+	public Tutorial(long id, String title, String description, boolean published) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.published = published;
+	}
+
+	public Tutorial() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	  
-	  public Tutorial(String title, String description, boolean published) {
-	    this.title = title;
-	    this.description = description;
-	    this.published = published;
-	  }
+	  
 }

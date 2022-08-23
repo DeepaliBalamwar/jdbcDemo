@@ -1,35 +1,31 @@
 package com.example.jdbcTemplateDemo.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.jdbcTemplateDemo.model.Tutorial;
-import com.example.jdbcTemplateDemo.repository.JdbcTutorialRepositoryImpl;
 import com.example.jdbcTemplateDemo.repository.TutorialRepository;
-import com.example.jdbcTemplateDemo.service.Tutorialservice;
 
-@CrossOrigin(origins = "http://localhost:8081" )
+//@CrossOrigin(origins = "http://localhost:8081" )
 @RestController
 @RequestMapping("/api")
 public class TutorialController 
 {
-  @Autowired
-  private JdbcTutorialRepositoryImpl tutorialRepositoryImpl;
+	@Autowired
+	private TutorialRepository repo;
+
+  public TutorialController()
+  {
+	  System.out.println("This is Tutorial Controller");
+  }
   
-//  @GetMapping("/tutorials")
+  //  @GetMapping("/tutorials")
 //  public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title)
 //  {
 //	  try 
@@ -51,7 +47,7 @@ public class TutorialController
 //	  }
 //  }
   
-  @PutMapping("/tutorials/{id}")
+//  @PutMapping("/tutorials/{id}")
 //   public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id)
 //   {
 ////	  Tutorial tutorials = employeeServiceImpl.findById(id);
@@ -75,10 +71,12 @@ public class TutorialController
 //	    }
 //	  }	
   
-  @PostMapping("/tutorials")
+  @PostMapping("/add")
   public ResponseEntity<String> createTutorial(@RequestBody Tutorial tutorial) {
     try {
-      tutorialRepositoryImpl.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), false));
+    	System.out.println("hello");
+      System.out.println("Controller");
+      repo.save(new  Tutorial(tutorial.getId(),tutorial.getTitle(), tutorial.getDescription(),tutorial.getPublished()));
       return new ResponseEntity<>("Tutorial was created successfully.", HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -15,10 +15,10 @@ public class TutorialRowMapper implements RowMapper
 	@Override
 	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Tutorial tutorial=new Tutorial();
-		tutorial.setId(rs.getInt("Tutorial_ID"));
-		tutorial.setTitle(rs.getString("Tutorial_Title"));
-		tutorial.setDescription(rs.getString("Tutorial_Description"));
-		tutorial.setPublished(true);
+		tutorial.setId(rs.getInt("id"));
+		tutorial.setTitle(rs.getString("title"));
+		tutorial.setDescription(rs.getString("description"));
+		tutorial.setPublished(rs.getString("published"));
 
 		return tutorial;
 	}
